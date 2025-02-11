@@ -1,0 +1,179 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+@keyframes swing {
+    /*rotate 旋轉角度，度數deg*/
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes rgbBorder {
+    0% { border-color: #ff0000; }    /* 紅色 */
+    33% { border-color: #00ff00; }   /* 綠色 */
+    66% { border-color: #0000ff; }   /* 藍色 */
+    100% { border-color: #ff0000; }  /* 回到紅色 */
+}
+
+/* @keyframes rgbColorChange {
+    0%  { filter: hue-rotate(0deg);}    
+    33% { filter: hue-rotate(120deg); }
+    66% { filter: hue-rotate(240deg); }
+    100% { filter: hue-rotate(360deg); }
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+/*
+ background_color
+ font_size
+ text_color
+ 都是由steamLab /chat-box上面做設定
+*/
+
+body {
+    text-shadow: 0 0 1px #000, 0 0 2px #000;
+    background: { background_color};
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: { font_size};
+    line-height: 1.5em;
+    color: {text_color};
+}
+
+/*
+ message_hide_delay
+ 由steamLab /chat-box上面做設定
+*/
+
+#log>div {
+    animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+    -webkit-animation: fadeInRight .3s ease forwards, fadeOut 0.5s ease {message_hide_delay} forwards;
+}
+
+.colon {
+    display: none;
+}
+
+#log {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 10px 10px;
+    width: 100%;
+}
+
+#log>div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+ 	padding-bottom: 35px;
+}
+#log>div::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
+#log>div.deleted {
+    visibility: hidden;
+}
+
+#log .emote {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 0.4em 0.2em;
+    position: relative;
+}
+
+#log .emote img {
+    display: inline-block;
+    height: 1em;
+    opacity: 0;
+}
+
+#log .message,#log .meta {
+    vertical-align: top;
+    display: table-cell;
+    padding-bottom: 0.1em;
+}
+
+#log .meta {
+    position: relative;
+    width: fit-content;
+    text-align: left;
+    padding: 5px 20px;
+    padding-left: 45px; 
+    margin-bottom: 8px;
+    background-color: rgba(204, 229, 255, 0.7);
+    border: 2px solid #ff0000;
+    border-radius: 15px;
+    font-size: 1.1em;
+    animation: rgbBorder 5s linear infinite;
+}
+#log .meta::before {
+    content: '';
+    position: absolute;
+    left: -5px; 
+    top: -8px;
+    width: 50px; 
+    height: 50px; 
+    background-image: url('https://cdn.streamlabs.com/users/52725420/library/4.72.png'); /*這裡放的是左側的圖片*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(-45deg);
+    z-index: 1;
+    animation: rgbColorChange 5s linear infinite; /*動畫效果 RGB*/
+}
+#log .message {
+    position: relative;
+    width: fit-content;
+    min-width: 50px;
+    max-width: 80%;
+    margin-left: 32px;
+    margin-top: -10px; 
+    margin-bottom: 25px;
+    background-color: rgba(204, 229, 255, 0.7);
+    border: 2px solid #ff0000;
+    border-radius: 15px;
+    padding: 8px 12px;
+    word-break: break-word;
+    display: inline-block;
+    animation: rgbBorder 5s linear infinite;
+}
+
+#log .message::after {
+    content: '';
+    position: absolute;
+    bottom: -25px;
+    right: -10;
+    width: 50px;
+    height: 50px;
+    background-image: url('');  /*這裡放的是右側的圖片*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: swing 2s infinite ease-in-out;  /*動畫效果 旋轉*/
+}
+.badge {
+    display: inline-block;
+    margin-right: 0.2em;
+    position: relative;
+    height: 1em;
+    vertical-align: middle;
+    top: -0.1em;
+}
+
+.name {
+    margin-left: 0.2em;
+}
