@@ -1,0 +1,165 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes rgbBorder {
+    0% { border-color: #ff0000; }
+    33% { border-color: #00ff00; }
+    66% { border-color: #0000ff; }
+    100% { border-color: #ff0000; }
+}
+
+@keyframes rgbColorChange {
+    0% { filter: hue-rotate(0deg); }    
+    33% { filter: hue-rotate(120deg); }
+    66% { filter: hue-rotate(240deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    text-shadow: 0 0 1px #000, 0 0 2px #000;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #ffffff;
+}
+
+.container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 10px 10px;
+    width: 100%;
+}
+
+.comments > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    padding-bottom: 35px;
+    animation: fadeInRight .3s ease forwards;
+}
+
+.avatar {
+    position: relative;
+    left: -5px;
+    top: 30px;
+    width: 50px;
+    height: 50px;
+    z-index: 1;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%; 
+}
+
+.avatar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./img/4.72.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(-45deg);
+    animation: rgbColorChange 5s linear infinite;
+    pointer-events: none;  /* 確保不會影響原始圖片的互動 */
+}
+
+.avatar img {
+    display: none;
+}
+.comment-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    position: relative;
+    width: fit-content;
+    text-align: left;
+    padding: 5px 20px;
+    padding-left: 45px;
+    margin-bottom: 8px;
+    background-color: rgba(204, 229, 255, 0.7);
+    border: 2px solid #ff0000;
+    border-radius: 15px;
+    font-size: 1.1em;
+    animation: rgbBorder 5s linear infinite;
+}
+
+.badge {
+    display: inline-block;
+    margin-right: 0.2em;
+    height: 1em;
+    vertical-align: middle;
+}
+
+.badge img {
+    height: 100%;
+}
+
+.comment-body {
+    position: relative;  /* 這行很重要 */
+    width: fit-content;
+    min-width: 50px;
+    max-width: 80%;
+    margin-left: 32px;
+    margin-top: -10px;
+    margin-bottom: 25px;
+    background-color: rgba(204, 229, 255, 0.7);
+    border: 2px solid #ff0000;
+    border-radius: 15px;
+    padding: 8px 12px;
+    word-break: break-word;
+    animation: rgbBorder 5s linear infinite;
+}
+
+.comment-body::after {
+    content: '';
+    position: absolute;
+    bottom: -25px;
+    right: -10px;
+    width: 50px;
+    height: 50px;
+    background-image: url('./img/圖片名稱.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: swing 2s infinite ease-in-out;
+}
+
+.paid-text {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Vue transition animations */
+.comment-enter-active, .comment-leave-active {
+    transition: all 0.3s ease;
+}
+
+.comment-enter-from, .comment-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
