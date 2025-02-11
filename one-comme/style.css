@@ -79,12 +79,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./img/4.72.png');
+    background-image: url('./img/圖片名稱.png');
     background-size: contain;
     background-repeat: no-repeat;
     transform: rotate(-45deg);
     animation: rgbColorChange 5s linear infinite;
-    pointer-events: none;  /* 確保不會影響原始圖片的互動 */
+    pointer-events: none; 
 }
 
 .avatar img {
@@ -121,7 +121,7 @@ body {
 }
 
 .comment-body {
-    position: relative;  /* 這行很重要 */
+    position: relative;
     width: fit-content;
     min-width: 50px;
     max-width: 80%;
